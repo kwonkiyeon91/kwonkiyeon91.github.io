@@ -4,6 +4,8 @@ const loginButton = loginForm.querySelector("button");
 const greeting = document.querySelector(".greeting");
 const USERNAME_KEY = "username";
 const HIDDEN_CLASSNAME = "hidden";
+const logOutButton = document.querySelector(".logout-btn");
+
 
 function onLoginSubmit(event) {
  event.preventDefault();
@@ -12,6 +14,7 @@ function onLoginSubmit(event) {
  localStorage.setItem(USERNAME_KEY, username);
 
  paintGreeting(username);
+ logOutButton.classList.remove("hidden");
 
 }
 
@@ -26,17 +29,15 @@ function checkUser() {
     if(savedUsername === null) {
         loginForm.classList.remove(HIDDEN_CLASSNAME);
         loginForm.addEventListener("submit", onLoginSubmit);
+        logOutButton.classList.add("hidden");
     } else {
-        paintGreeting(savedUsername)
+        paintGreeting(savedUsername);
+        logOutButton.classList.remove("hidden");
     }
 }
 
 loginForm.addEventListener("submit", onLoginSubmit);
 checkUser();
-
-
-
-const logOutButton = document.querySelector(".logout-btn");
 
 function storageRemove() {
     localStorage.clear();
